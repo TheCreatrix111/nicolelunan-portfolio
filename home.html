@@ -195,12 +195,24 @@
       position: relative;
       flex: 1;
       min-height: 0;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
     }
     .resume-section iframe {
       width: 100%;
       height: 100%;
       border: none;
       display: block;
+      pointer-events: none;
+      overflow: hidden;
+      transform-origin: top center;
+    }
+    .resume-section::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 2;
     }
     .resume-download-btn {
       position: absolute;
