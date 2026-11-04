@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dr. Nicole Lunan — Creatrix 111 Technology</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      width: 100%; height: 100%;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      color: #fff;
+      background: #000;
+    }
+
+    /* ── DESKTOP: phone frame ── */
+    .desktop-shell {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background:
+        radial-gradient(ellipse 60% 50% at 20% 50%, rgba(167,139,250,0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 60% at 80% 50%, rgba(0,180,100,0.04) 0%, transparent 70%),
+        #050b18;
+    }
+
+    /* ── PHONE FRAME ── */
+    .phone-frame {
+      width: 390px;
+      height: 844px;
+      background: #000;
+      border-radius: 52px;
+      border: 8px solid #1a1a2e;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.08),
+        0 40px 120px rgba(0,0,0,0.8),
+        0 0 60px rgba(167,139,250,0.12),
+        inset 0 0 0 1px rgba(255,255,255,0.04);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .phone-island {
+      position: absolute;
+      top: 12px; left: 50%;
+      transform: translateX(-50%);
+      width: 120px; height: 34px;
+      background: #000;
+      border-radius: 20px;
+      z-index: 20;
+    }
+    .phone-home {
+      position: absolute;
+      bottom: 8px; left: 50%;
+      transform: translateX(-50%);
+      width: 130px; height: 5px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 3px;
+      z-index: 20;
+    }
+
+    /* ── VIDEO ── */
+    .phone-video {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .phone-video video {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+
+    /* ── BOTTOM GRADIENT for text legibility ── */
+    .phone-gradient {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.0) 0%,
+        rgba(0,0,0,0.0) 30%,
+        rgba(0,0,0,0.55) 60%,
+        rgba(0,0,0,0.82) 100%
+      );
+    }
+
+    /* ── PARTICLES ── */
+    .particles {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .particle {
+      position: absolute;
+      background: #fff;
+      border-radius: 50%;
+      opacity: 0;
+      animation: drift var(--dur) ease-in-out var(--delay) infinite;
+    }
+    @keyframes drift {
+      0%   { opacity: 0; transform: translateY(0) translateX(0); }
+      20%  { opacity: 0.4; }
+      80%  { opacity: 0.15; }
+      100% { opacity: 0; transform: translateY(-140px) translateX(var(--dx)); }
+    }
+
+    /* ── CONTENT ── */
+    .phone-content {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 28px 52px;
+      opacity: 0;
+      animation: fadeIn 1s ease 0.4s forwards;
+    }
+    @keyframes fadeIn { to { opacity: 1; } }
+
+    .top-label {
+      text-align: center;
+      z-index: 4;
+      margin-bottom: 16px;
+      text-align: center;
+      font-size: 11px;
+      font-weight: 200;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: #fff;
+      text-shadow:
+        0 0 20px rgba(255,255,255,0.9),
+        0 0 40px rgba(255,255,255,0.4),
+        0 2px 6px rgba(0,0,0,0.9);
+      opacity: 0;
+      animation: riseIn 0.9s ease 0.5s forwards;
+      padding: 0 20px;
+    }
+
+    .welcome-to {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 10px;
+      opacity: 0;
+      animation: riseIn 0.7s ease 0.8s forwards;
+      text-shadow: 0 0 2px #000, 0 2px 8px rgba(0,0,0,0.9);
+    }
+
+    .big-name {
+      font-size: 30px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      color: #fff;
+      text-shadow:
+        0 0 2px #000,
+        0 2px 8px rgba(0,0,0,0.95),
+        0 4px 24px rgba(0,0,0,0.8);
+      opacity: 0;
+      animation: riseIn 0.8s ease 1.0s forwards;
+    }
+
+    .divider {
+      width: 40px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #fff, transparent);
+      margin: 14px 0;
+      opacity: 0;
+      animation: riseIn 0.6s ease 1.2s forwards;
+    }
+
+    .subtitle {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #fff;
+      line-height: 1.9;
+      opacity: 0;
+      animation: riseIn 0.7s ease 1.35s forwards;
+      text-shadow: 0 0 2px #000, 0 2px 8px rgba(0,0,0,0.95);
+      margin-bottom: 6px;
+    }
+    .subtitle em {
+      font-style: normal;
+      font-weight: 900;
+      color: #fff;
+    }
+
+    .tagline {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.8);
+      text-shadow: 0 1px 4px rgba(0,0,0,0.95);
+      opacity: 0;
+      animation: riseIn 0.7s ease 1.6s forwards;
+      margin-bottom: 24px;
+    }
+
+    /* ── ENTER BUTTON ── */
+    .enter-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      border: 1.5px solid rgba(255,255,255,0.5);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 16px 24px;
+      border-radius: 50px;
+      text-decoration: none;
+      cursor: pointer;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.08);
+      transition: background 0.25s, box-shadow 0.25s, transform 0.2s;
+      opacity: 0;
+      animation: riseIn 0.8s ease 1.7s forwards;
+    }
+    .enter-btn:hover {
+      background: rgba(255,255,255,0.22);
+      box-shadow: 0 0 32px rgba(255,255,255,0.2);
+      transform: translateY(-2px);
+    }
+    .enter-btn:active { transform: scale(0.97); }
+
+    .btn-shield {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      color: #fff;
+    }
+
+    .btn-arrow {
+      width: 14px; height: 14px;
+      flex-shrink: 0;
+    }
+
+    @keyframes riseIn {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── EXIT ── */
+    body.exit .desktop-shell {
+      animation: exitFade 0.65s ease forwards;
+    }
+    @keyframes exitFade { to { opacity: 0; } }
+
+    /* ── MOBILE ── */
+    @media (max-width: 480px) {
+      body { overflow: hidden; }
+      .desktop-shell {
+        display: block;
+        min-height: 100vh;
+        background: #000;
+      }
+      .phone-frame {
+        width: 100%;
+        height: 100vh;
+        border-radius: 0;
+        border: none;
+        box-shadow: none;
+      }
+      .phone-island, .phone-home { display: none; }
+      .big-name { font-size: 48px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="desktop-shell">
+  <div class="phone-frame">
+
+    <div class="phone-island"></div>
+    <div class="phone-home"></div>
+
+    <!-- Video -->
+    <div class="phone-video">
+      <video autoplay muted loop playsinline>
+        <source src="assets/intro.mov" type="video/mp4" />
+      </video>
+    </div>
+
+    <!-- Bottom fade for text -->
+    <div class="phone-gradient"></div>
+
+    <!-- Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Content anchored to bottom -->
+    <div class="phone-content">
+      <div class="top-label">Activate High Frequency</div>
+      <div class="welcome-to">Welcome</div>
+      <div class="big-name">Dr. Nicole Lunan</div>
+      <div class="divider"></div>
+      <div class="subtitle">
+        <em>Creatrix</em> · 111 Technology<br>
+        AI Systems Architect · PhD<br>
+        Founder &amp; CEO
+      </div>
+      <div class="tagline">Select your path to explore the work</div>
+
+      <a class="enter-btn" href="home.html" id="enterBtn">
+        <svg class="btn-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7L12 2z"/></svg>
+        You May Enter
+        <svg class="btn-arrow" viewBox="0 0 16 16" fill="none">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // Particles
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 28; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = 1 + Math.random() * 1.8;
+    p.style.cssText = `
+      left: ${Math.random() * 100}%;
+      top: ${5 + Math.random() * 90}%;
+      width: ${size}px;
+      height: ${size}px;
+      --dur: ${4 + Math.random() * 5}s;
+      --delay: ${Math.random() * 7}s;
+      --dx: ${(Math.random() - 0.5) * 80}px;
+    `;
+    container.appendChild(p);
+  }
+
+  // Smooth exit
+  document.getElementById('enterBtn').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.body.classList.add('exit');
+    setTimeout(() => { window.location.href = 'home.html'; }, 650);
+  });
+</script>
+</body>
+</html>
