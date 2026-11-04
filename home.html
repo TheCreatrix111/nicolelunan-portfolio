@@ -1441,14 +1441,19 @@
   // Touch swipe
   var tx = 0, ty = 0;
   var container = document.getElementById('swipeContainer');
+  var touchStartTime = 0;
   container.addEventListener('touchstart', function(e) {
     tx = e.touches[0].clientX;
     ty = e.touches[0].clientY;
+    touchStartTime = Date.now();
   }, { passive: true });
 
   container.addEventListener('touchend', function(e) {
     var dx = e.changedTouches[0].clientX - tx;
     var dy = e.changedTouches[0].clientY - ty;
+    var dt = Date.now() - touchStartTime;
+    // If it's a quick tap (under 200ms) or tiny movement, let the click through
+    if (dt < 200 && Math.abs(dx) < 10 && Math.abs(dy) < 10) return;
     // Only swipe horizontally if it's more horizontal than vertical
     if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
       if (dx < 0) goTo(cur + 1);
