@@ -290,7 +290,8 @@
 
     <!-- Video -->
     <div class="phone-video">
-      <video autoplay muted loop playsinline>
+      <video id="heroVideo" autoplay muted loop playsinline preload="auto">
+        <source src="assets/intro.mov" type="video/quicktime" />
         <source src="assets/intro.mov" type="video/mp4" />
       </video>
     </div>
@@ -344,6 +345,10 @@
     `;
     container.appendChild(p);
   }
+
+  // Force video play on desktop
+  var v = document.getElementById('heroVideo');
+  if (v) { v.play().catch(function(){}); }
 
   // Smooth exit
   document.getElementById('enterBtn').addEventListener('click', function(e) {
