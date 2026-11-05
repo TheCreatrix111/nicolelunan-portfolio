@@ -1173,7 +1173,23 @@
           </div>
         </div>
 
-        <!-- ── SLIDE 8: VENTRALIS ── -->
+        <!-- ── SLIDE 8: HINTON QUOTE ── -->
+        <div class="slide statement-slide" id="slide-hinton">
+          <div class="statement-inner">
+            <div class="eyebrow" style="color:#d4a843;font-size:10px;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;margin-bottom:32px;">Geoffrey Hinton — AI Godfather</div>
+            <div style="font-size:28px;font-weight:900;line-height:1.2;color:#fff;letter-spacing:-0.02em;margin-bottom:28px;">
+              "The right model is the only model we have of a more intelligent thing being controlled by a less intelligent thing —
+              <span style="color:#a78bfa;">which is a mother being controlled by her baby.</span>"
+            </div>
+            <div style="width:40px;height:2px;background:linear-gradient(90deg,#a78bfa,#d4a843);border-radius:2px;margin-bottom:28px;"></div>
+            <div style="font-size:13px;color:rgba(255,255,255,0.5);line-height:1.75;max-width:320px;">
+              Hinton's conclusion: AI must be built with <strong style="color:#fff;">maternal instinct</strong> — genuine care for human wellbeing — not just rules to follow.<br><br>
+              Dr. Nicole Lunan has been building exactly that.
+            </div>
+          </div>
+        </div>
+
+        <!-- ── SLIDE 9: VENTRALIS ── -->
         <div class="slide chapter-slide ventralis-chapter" id="slide-ventralis">
           <div class="chapter-scroll">
 
@@ -1413,6 +1429,7 @@
             <div class="dot" data-i="10"></div>
             <div class="dot" data-i="11"></div>
             <div class="dot" data-i="12"></div>
+            <div class="dot" data-i="13"></div>
           </div>
           <a class="contact-btn" href="mailto:nicole@nicolelunan.com" title="Contact Nicole">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1430,7 +1447,7 @@
 
 <script>
   var cur = 0;
-  var total = 13;
+  var total = 14;
   var track = document.getElementById('slidesTrack');
   var dots = document.querySelectorAll('.dot');
   var hint = document.getElementById('swipeHint');
@@ -1444,7 +1461,7 @@
       if (i === cur) {
         d.classList.add('on');
         // dark slides: 4 (data statement), 6 (rogue AI)
-        var onWhite = cur !== 4 && cur !== 7;
+        var onWhite = cur !== 4 && cur !== 7 && cur !== 8;
         d.style.background = onWhite ? '#0a0a14' : '#a78bfa';
         d.style.width = '18px';
         d.style.borderRadius = '4px';
